@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Price Prediction</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Gold Price Prediction</h1>
+    </header>
+    
+    <section id="chart-section">
+        <h2>Historical Gold Prices</h2>
+        <p>Gold prices have fluctuated significantly over the past century. For example, in the 1920s, gold prices were relatively stable, averaging around $20.67 per ounce. However, significant increases occurred in the 1970s when prices surged due to the collapse of the Bretton Woods system, peaking at around $850 per ounce in 1980. Throughout the 2000s, gold prices saw a sharp rise, reaching a record high of over $1,900 per ounce in 2011 due to the global financial crisis.</p>
+        <canvas id="goldPriceChart"></canvas>
+    </section>
+    
+    <section id="prediction-section">
+        <h2>Predict Future Gold Prices</h2>
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="startDate">
+        
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" name="endDate">
+        
+        <button onclick="predictPrice()">Predict</button>
+        
+        <div id="prediction-result">
+            <h3>Predicted Price:</h3>
+            <p id="priceOutput">$0.00</p>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
