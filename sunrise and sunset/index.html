@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunrise and Sunset Time Finder</title>
+    <style>
+        body {
+            font-family: 'Cursive', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(120deg, rgba(255, 94, 98, 0.9), rgba(253, 155, 120, 0.8)), 
+                        url('https://cdn.pixabay.com/photo/2016/11/29/09/32/beach-1867285_960_720.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #ffd1a9;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        button {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        #sunTimes {
+            margin-top: 30px;
+            font-size: 1.5em;
+            color: #ffeddb;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Find Your Sunrise & Sunset</h1>
+        <button onclick="getSunriseSunset()">See the Beauty of the Sun</button>
+        <div id="sunTimes"></div>
+    </div>
+
+    <script>
+        function getSunriseSunset() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    let lat = position.coords.latitude;
+                    let lon = position.coords.longitude;
+
+                    // Call the Sunrise-Sunset API
+                    fetch(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&formatted=0`)
+                        .then(response => response.json())
+                        .then(data => {
+                            let sunrise = new Date(data.results.sunrise).toLocaleTimeString();
+                            let sunset = new Date(data.results.sunset).toLocaleTimeString();
+
+                            document.getElementById('sunTimes').innerHTML = `
+                                <p>Sunrise: ${sunrise}</p>
+                                <p>Sunset: ${sunset}</p>
+                            `;
+                        })
+                        .catch(error => {
+                            document.getElementById('sunTimes').innerHTML = 'Error fetching data.';
+                            console.error('Error:', error);
+                        });
+                });
+            } else {
+                document.getElementById('sunTimes').innerHTML = 'Geolocation is not supported by your browser.';
+            }
+        }
+    </script>
+</body>
+</html>
