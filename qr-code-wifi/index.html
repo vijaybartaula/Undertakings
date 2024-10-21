@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiFi QR Code Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>WiFi QR Code Generator</h1>
+        <form id="wifiForm">
+            <label for="ssid">WiFi Network Name (SSID):</label>
+            <input type="text" id="ssid" placeholder="Enter SSID" required>
+            
+            <label for="password">Password:</label>
+            <input type="text" id="password" placeholder="Enter Password" required>
+            
+            <label for="encryption">Encryption:</label>
+            <select id="encryption">
+                <option value="WPA">WPA/WPA2</option>
+                <option value="WEP">WEP</option>
+                <option value="nopass">None</option>
+            </select>
+            
+            <button type="submit">Generate QR Code</button>
+        </form>
+
+        <div id="qrcode"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
